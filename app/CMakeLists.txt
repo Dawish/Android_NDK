@@ -20,7 +20,9 @@ add_library( # Sets the name of the library.
 
              # Provides a relative path to your source file(s).
              # 为源文件提供一个相对路径。
-             src/main/cpp/native-lib.cpp )
+             src/main/cpp/native-lib.cpp
+             src/main/cpp/JniH.cpp
+             )
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
