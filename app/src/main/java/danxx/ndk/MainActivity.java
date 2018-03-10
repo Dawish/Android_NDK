@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     tvJni.setText(getHelloJni());
 
     TextView tvJniH = findViewById(R.id.jni_h_text);
-    tvJniH.setText(JniH.getString());
+    tvJniH.setText(getStringH("NMNMNMNMMNNM"));
 
   }
 
@@ -38,4 +38,7 @@ public class MainActivity extends AppCompatActivity {
   public native String stringFromJNI();
 
   public native String getHelloJni();
+
+  public native String getStringH(String str);
+
 }
