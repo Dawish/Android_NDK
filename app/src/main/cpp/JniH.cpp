@@ -6,15 +6,9 @@
 #include <string>
 #include <android/log.h>
 #import "danxx_ndk_JniH.h"
+#include "log.h"
 
-// log标签
 #define  TAG    "JNI_ERROR:"
-// 定义info信息
-#define LOGI(...) __android_log_print(ANDROID_LOG_INFO,TAG,__VA_ARGS__)
-// 定义debug信息
-#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, TAG, __VA_ARGS__)
-// 定义error信息
-#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,TAG,__VA_ARGS__)
 
 
 extern "C"
