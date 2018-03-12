@@ -5,8 +5,10 @@
 #include <jni.h>
 #include <string>
 #include <android/log.h>
+#include <string.h>
 #import "JniStringH.h"
 #include "Log.h"
+#include<malloc.h>
 
 #define  TAG    "JNI_ERROR:"
 
