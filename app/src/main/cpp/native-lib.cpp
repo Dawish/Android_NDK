@@ -38,7 +38,7 @@ Java_danxx_ndk_MainActivity_getStringH(JNIEnv *env, jobject instance, jstring js
     env->ReleaseStringUTFChars(jstr_, str);
 
     const char *p = cs.c_str();
-
+    /* 构造新的Java.lang.String，如果JVM分配内存失败，则抛出OutOfMemoryError，并且返回NULL */
     return env->NewStringUTF(p);
 }
 
