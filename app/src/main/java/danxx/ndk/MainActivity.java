@@ -9,6 +9,12 @@ import android.widget.TextView;
  */
 public class MainActivity extends AppCompatActivity {
 
+  public String name = "danxx";
+
+  public String getName(){
+    return name;
+  }
+
   // Used to load the 'native-lib' library on application startup.
   static {
     System.loadLibrary("native-lib");
@@ -29,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
     TextView tvJniH = findViewById(R.id.jni_h_text);
     tvJniH.setText(getStringH("NMNMNMNMMNNM"));
 
+    TextView stringFJni = findViewById(R.id.jni_h_text01);
+    stringFJni.setText(getStringNativeFormJava());
+
   }
 
   /**
@@ -40,5 +49,9 @@ public class MainActivity extends AppCompatActivity {
   public native String getHelloJni();
 
   public native String getStringH(String str);
+
+  public native String getStringNativeFormJava();
+
+  public native String getStringNativeFormJavaMethod();
 
 }

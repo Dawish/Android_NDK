@@ -1,5 +1,6 @@
 #include <jni.h>
 #include <string>
+#include <string.h>
 #include "JniStringH.h"
 #include "StringUtil.h"
 
@@ -43,3 +44,31 @@ Java_danxx_ndk_MainActivity_getStringH(JNIEnv *env, jobject instance, jstring js
 }
 
 
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_danxx_ndk_MainActivity_getStringNativeFormJava(JNIEnv *env, jobject instance) {
+
+    //    jclass GetObjectClass(jobject obj) 获取调用该方法的java类
+    jclass  _jThis = env->GetObjectClass(instance);
+    //获取java类中的成员变量id
+    jfieldID  jfieldID1 = env->GetFieldID(_jThis,"name","Ljava/lang/String;");
+    //获取java类中的string成员变量 返回jni中的字符串
+    jstring  str = (jstring) env->GetObjectField(instance, jfieldID1);
+
+    //把jni字符串str转换为java中的string
+    char *chars = (char *) env->GetStringChars(str, NULL);
+    char temp[20] = " success!";
+    char *resultStr = strcat(chars,temp);
+
+    return env->NewStringUTF(resultStr);
+}
+
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_danxx_ndk_MainActivity_getStringNativeFormJavaMethod(JNIEnv *env, jobject instance) {
+
+    // TODO
+
+
+    return env->NewStringUTF("haha");
+}
