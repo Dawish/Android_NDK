@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
     TextView stringFJni = findViewById(R.id.jni_h_text01);
     stringFJni.setText(getStringNativeFormJava());
 
+    TextView stringFJni2 = findViewById(R.id.jni_h_text02);
+    stringFJni2.setText(getStringNativeFormJavaMethod());
+
   }
 
   /**

@@ -44,6 +44,7 @@ Java_danxx_ndk_MainActivity_getStringH(JNIEnv *env, jobject instance, jstring js
 }
 
 
+//从java类中获取一个字符串
 extern "C"
 JNIEXPORT jstring JNICALL
 Java_danxx_ndk_MainActivity_getStringNativeFormJava(JNIEnv *env, jobject instance) {
@@ -63,12 +64,21 @@ Java_danxx_ndk_MainActivity_getStringNativeFormJava(JNIEnv *env, jobject instanc
     return env->NewStringUTF(resultStr);
 }
 
+//访问java类中的一个方法
 extern "C"
 JNIEXPORT jstring JNICALL
 Java_danxx_ndk_MainActivity_getStringNativeFormJavaMethod(JNIEnv *env, jobject instance) {
 
     // TODO
+    jclass jclass_ = env->GetObjectClass(instance);
+    jmethodID  jmethodID = env->GetMethodID(jclass_,"getName","()Ljava/lang/String;");
+    //调用java中的getName方法
+    jstring  jstring_ = (jstring) env->CallObjectMethod(instance, jmethodID);
 
+    //把jni字符串str转换为java中的string
+    char *chars = (char *) env->GetStringUTFChars(jstring_, NULL);
+    char temp[30] = " FormJavaMethod success!";
+    char *resultStr = strcat(chars,temp);
 
-    return env->NewStringUTF("haha");
+    return env->NewStringUTF(resultStr);
 }
