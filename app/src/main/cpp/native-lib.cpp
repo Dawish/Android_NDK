@@ -56,7 +56,7 @@ Java_danxx_ndk_MainActivity_getStringNativeFormJava(JNIEnv *env, jobject instanc
     jstring  str = (jstring) env->GetObjectField(instance, jfieldID1);
 
     //把jni字符串str转换为java中的string
-    char *chars = (char *) env->GetStringChars(str, NULL);
+    char *chars = (char *) env->GetStringUTFChars(str, NULL);
     char temp[20] = " success!";
     char *resultStr = strcat(chars,temp);
 
