@@ -1,13 +1,16 @@
 #include <jni.h>
 #include <string>
 #include <string.h>
+#include <stdlib.h>
 #include "JniStringH.h"
 #include "StringUtil.h"
 
 extern "C"
 JNIEXPORT jstring JNICALL
 Java_danxx_ndk_MainActivity_stringFromJNI(
-        JNIEnv *env, //JNIEnv的类型是一个指针，指向存储全部JNI函数指针的结构
+        JNIEnv *env, //JNIEnv的类型是一个指针，指向存储全部JNI函数指针的结构,是java和c++/c交互的桥梁
+                    // java每个线程在和C/C++互相调用的时候。其相应的JNIEnv 也是相互独立。
+                    // 请参考： https://www.cnblogs.com/mfmdaoyou/p/7252031.html
         jobject     //这是非静态方法，这里表示this
 ) {
     std::string hello = "Hello from C++";
@@ -81,4 +84,25 @@ Java_danxx_ndk_MainActivity_getStringNativeFormJavaMethod(JNIEnv *env, jobject i
     char *resultStr = strcat(chars,temp);
 
     return env->NewStringUTF(resultStr);
+}
+
+int compare(const void *a, const void *b){
+    return *(int *)a - *(int *)b;//升序
+}
+
+//变量的前面表示取变量地址赋值给指针， 如：int a = 0; int *pa = &a;
+//* (int *) 将指针转成int*，然后取该指针指向地址的值
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_danxx_ndk_MainActivity_getArray(JNIEnv *env, jobject instance, jintArray arrays_) {
+    //把java数组转换为jni数组指针
+    jint *arrays = env->GetIntArrayElements(arrays_, NULL);
+    // TODO
+    //获取数据长度
+    int _len = env->GetArrayLength(arrays_);
+
+    qsort(arrays,_len, sizeof(int),compare);
+
+    env->ReleaseIntArrayElements(arrays_, arrays, 0);
 }

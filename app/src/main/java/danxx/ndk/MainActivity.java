@@ -1,8 +1,12 @@
 package danxx.ndk;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 /**
  * http://blog.csdn.net/cloverjf/article/details/78654366
@@ -14,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
   public String getName(){
     return name;
   }
+
+  private int[] arrays = {20,35,2,98,4};
 
   // Used to load the 'native-lib' library on application startup.
   static {
@@ -41,6 +47,12 @@ public class MainActivity extends AppCompatActivity {
     TextView stringFJni2 = findViewById(R.id.jni_h_text02);
     stringFJni2.setText(getStringNativeFormJavaMethod());
 
+    getArray(arrays);
+
+    for(int i : arrays){
+      Log.d("danxx","i----> "+i);
+    }
+
   }
 
   /**
@@ -56,5 +68,7 @@ public class MainActivity extends AppCompatActivity {
   public native String getStringNativeFormJava();
 
   public native String getStringNativeFormJavaMethod();
+
+  public native void getArray(int[] arrays);
 
 }
