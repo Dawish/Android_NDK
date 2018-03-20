@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.IllegalFormatException;
 
 /**
  * http://blog.csdn.net/cloverjf/article/details/78654366
@@ -53,6 +54,20 @@ public class MainActivity extends AppCompatActivity {
       Log.d("danxx","i----> "+i);
     }
 
+    try {
+      jniExceptionTest();
+    }catch (Exception e){
+      Log.d("exception","exception msg------------> "+e.getMessage());
+      e.printStackTrace();
+    }
+
+    if(1 != 1){
+      //java中抛出异常
+      throw new IllegalArgumentException("参数异常了233");
+    }
+
+    Log.d("danxx","Exception------------> ");
+
   }
 
   /**
@@ -70,5 +85,7 @@ public class MainActivity extends AppCompatActivity {
   public native String getStringNativeFormJavaMethod();
 
   public native void getArray(int[] arrays);
+
+  public native void jniExceptionTest();
 
 }

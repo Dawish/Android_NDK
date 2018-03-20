@@ -106,3 +106,36 @@ Java_danxx_ndk_MainActivity_getArray(JNIEnv *env, jobject instance, jintArray ar
 
     env->ReleaseIntArrayElements(arrays_, arrays, 0);
 }
+
+//jni异常捕捉和抛出，抛出后java中可捕捉到
+extern "C"
+JNIEXPORT void JNICALL
+Java_danxx_ndk_MainActivity_jniExceptionTest(JNIEnv *env, jobject instance) {
+
+    // TODO
+    jclass  _class = env->GetObjectClass(instance);
+    //故意制造异常
+    jfieldID jfieldID1 = env->GetFieldID(_class,"name2","Ljava/lang/String;");
+    //ExceptionClear()：清除一个待决的异常。
+    //ExceptionDescribe()：打印一个异常和堆栈跟踪信息。
+    //ExceptionOccurred()：判断一个异常是否已被丢弃，但尚未清除。
+    jthrowable jthrowable1 = env->ExceptionOccurred();
+    if(jthrowable1 != NULL){
+        //清除异常，java中不会捕捉到
+        env->ExceptionClear();
+        //重新操作
+        jfieldID1 = env->GetFieldID(_class,"name","Ljava/lang/String;");
+    }
+    //获取java字符串
+    jstring  jstring1 = (jstring) env->GetObjectField(instance, jfieldID1);
+    //获得java中utf-8字符串指针
+    char * strChar = (char *) env->GetStringUTFChars(jstring1, NULL);
+    //int strcmp(const char* __lhs, const char* __rhs)
+    if(strcmp(strChar, "xixi")){
+        //故意抛出异常，让java中可以catch住     jclass FindClass(const char* name)
+        jclass javaThrow = env->FindClass("java/lang/IllegalArgumentException");
+        env->ThrowNew(javaThrow, "参数错误！");
+
+    }
+
+}
