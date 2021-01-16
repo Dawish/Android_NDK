@@ -1,19 +1,26 @@
 #include <jni.h>
-#include <string>
-#include <string.h>
+#include "string.h"
 #include <stdlib.h>
 #include "JniStringH.h"
 #include "StringUtil.h"
+#include "A.h"
+#include "Log.h"
 
 extern "C"
 JNIEXPORT jstring JNICALL
 Java_danxx_ndk_MainActivity_stringFromJNI(
-        JNIEnv *env, //JNIEnv的类型是一个指针，指向存储全部JNI函数指针的结构,是java和c++/c交互的桥梁
-                    // java每个线程在和C/C++互相调用的时候。其相应的JNIEnv 也是相互独立。
-                    // 请参考： https://www.cnblogs.com/mfmdaoyou/p/7252031.html
-        jobject     //这是非静态方法，这里表示this
-) {
-    std::string hello = "Hello from C++";
+        //JNIEnv的类型是一个指针，指向存储全部JNI函数指针的结构,是java和c++/c交互的桥梁
+        // java每个线程在和C/C++互相调用的时候。其相应的JNIEnv 也是相互独立。
+        // 参考： https://www.cnblogs.com/mfmdaoyou/p/7252031.html
+        JNIEnv *env,
+        //这是非静态方法，这里表示this
+        jobject) {
+    string hello = " -->Hello from C++";
+    // 没使用new关键字创建对象，main函数结束后会自动回收对象
+    A a = A();
+
+    hello = a.getStr() + hello;
+
     return env->NewStringUTF(hello.c_str());
 }
 
@@ -52,7 +59,7 @@ extern "C"
 JNIEXPORT jstring JNICALL
 Java_danxx_ndk_MainActivity_getStringNativeFormJava(JNIEnv *env, jobject instance) {
 
-    //    jclass GetObjectClass(jobject obj) 获取调用该方法的java类
+    // jclass GetObjectClass(jobject obj) 获取调用该方法的java类
     jclass  _jThis = env->GetObjectClass(instance);
     //获取java类中的成员变量id
     jfieldID  jfieldID1 = env->GetFieldID(_jThis,"name","Ljava/lang/String;");
