@@ -5,6 +5,11 @@
 #include "StringUtil.h"
 #include "A.h"
 #include "Log.h"
+#include <fstream>
+#include <istream>
+#include <iostream>
+#include <unistd.h>
+#include <sys/stat.h>
 
 extern "C"
 JNIEXPORT jstring JNICALL
@@ -139,10 +144,73 @@ Java_danxx_ndk_MainActivity_jniExceptionTest(JNIEnv *env, jobject instance) {
     char * strChar = (char *) env->GetStringUTFChars(jstring1, NULL);
     //int strcmp(const char* __lhs, const char* __rhs)
     if(strcmp(strChar, "xixi")){
-        //故意抛出异常，让java中可以catch住     jclass FindClass(const char* name)
+        //故意抛出异常，让java中可以catch住 jclass FindClass(const char* name)
         jclass javaThrow = env->FindClass("java/lang/IllegalArgumentException");
         env->ThrowNew(javaThrow, "参数错误！");
 
     }
+
+}
+
+extern "C"
+JNIEXPORT jstring  JNICALL
+Java_danxx_ndk_MainActivity_ndkReadFile(JNIEnv *env, jobject instance, jstring strPath_) {
+
+//    const char *strPath = env->GetStringUTFChars(strPath_, 0);
+//
+//    // TODO
+//    string str = "";
+//    int nRet = access(strPath, F_OK);
+//    if (nRet) {
+//        str = "File Not Exist.";
+//        LOGD("File Not Exist.");
+//    } else {
+//        LOGD("File Exist.");
+//        FILE *pFile = fopen(strPath, "rw");
+//        fseek(pFile, 0L, SEEK_END);
+//        int nFileSize = ftell(pFile);
+//        char *pszBuf = NULL;
+//        pszBuf = new char[nFileSize];
+//        if (pszBuf) {
+//            rewind(pFile);
+//            fread(pszBuf, nFileSize, 1, pFile);
+//            str = pszBuf;
+//            delete[]pszBuf;
+//            pszBuf = NULL;
+//        }
+//        fclose(pFile);
+//    }
+//
+//    env->ReleaseStringUTFChars(strPath_, strPath);
+//
+//    return env->NewStringUTF(str.data());
+
+    const char *strPath = env->GetStringUTFChars(strPath_, 0);
+
+    LOGD("%s", "strPath");
+    LOGD("%s", strPath);
+
+    char* str = "Native Code!";
+
+    FILE* file = fopen(strPath, "rw");
+    if (file == NULL) {
+        file = fopen(strPath, "rw");
+        if (file == NULL) {
+            file = fopen(strPath, "rw");
+        }
+    }
+
+    if (file == NULL) {
+        str = "Native Code! fopen() did not work!";
+    } else {
+        str = "Native Code! fopen() worked!";
+        fputs("HELLO WORLD!\n", file);
+        fflush(file);
+        fclose(file);
+    }
+    LOGD("%s", str);
+    // env->ReleaseStringUTFChars(strPath_, strPath);
+
+    return env->NewStringUTF(str);
 
 }
