@@ -20,6 +20,7 @@ import java.io.File;
 public class MainActivity extends AppCompatActivity {
 
     public String name = "danxx";
+    private TextView mTvContent;
 
     public String getName() {
         return name;
@@ -58,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
 
         TextView stringFJni2 = findViewById(R.id.jni_h_text02);
         stringFJni2.setText(getStringNativeFormJavaMethod());
+
+        mTvContent = findViewById(R.id.content_id);
 
         findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,7 +133,8 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Log.e("DXX", "file is not exists");
         }
-        ndkReadFile(filePath);
+        String fileContent = ndkReadFile(filePath);
+        mTvContent.setText(fileContent);
     }
 
     /**
