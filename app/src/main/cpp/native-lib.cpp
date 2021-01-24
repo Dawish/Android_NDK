@@ -7,7 +7,8 @@
 #include "Log.h"
 #include <unistd.h>
 #include <sys/stat.h>
-
+#include<stdint.h>
+#include "Type_c.h"
 using namespace std;
 
 extern "C"
@@ -164,9 +165,9 @@ Java_danxx_ndk_MainActivity_ndkReadFile(JNIEnv *env, jobject instance, jstring s
     int nRet = access(strPath, F_OK);
     if (nRet) {
         str = "File Not Exist.";
-        LOGD("%s", "File Not Exist.");
+        LOGD("%s", "NDK read file not exist.");
     } else {
-        LOGD("%s", "File Exist.");
+        LOGD("%s", "NDK read file exist.");
         FILE *pFile = fopen(strPath, "r");
         fseek(pFile, 0L, SEEK_END);
         int nFileSize = ftell(pFile);
@@ -185,5 +186,18 @@ Java_danxx_ndk_MainActivity_ndkReadFile(JNIEnv *env, jobject instance, jstring s
     env->ReleaseStringUTFChars(strPath_, strPath);
 
     return env->NewStringUTF(str.data());
+
+}
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_danxx_ndk_MainActivity_invokeC(JNIEnv *env, jobject thiz) {
+
+    char name = getName();
+
+    LOGD("%s", name);
+
+    int rst = square(10);
+
+    LOGD("%s","%s", name, rst);
 
 }

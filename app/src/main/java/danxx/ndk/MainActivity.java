@@ -101,6 +101,13 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d("danxx", "Exception------------> ");
 
+        findViewById(R.id.btn2).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                invokeC();
+            }
+        });
+
     }
 
     @Override
@@ -156,5 +163,8 @@ public class MainActivity extends AppCompatActivity {
     public native void jniExceptionTest();
 
     public native String ndkReadFile(String filePath);
+
+    public native String invokeC();
+
 
 }
