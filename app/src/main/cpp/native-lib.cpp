@@ -9,6 +9,7 @@
 #include <sys/stat.h>
 #include<stdint.h>
 #include "Type_c.h"
+
 using namespace std;
 
 extern "C"
@@ -192,12 +193,9 @@ extern "C"
 JNIEXPORT jstring JNICALL
 Java_danxx_ndk_MainActivity_invokeC(JNIEnv *env, jobject thiz) {
 
-    char name = getName();
+    int mSum = sum(1, 3);
+    string mm = to_string(mSum);
+    LOGD("%s", mm.c_str());
 
-    LOGD("%s", name);
-
-    int rst = square(10);
-
-    LOGD("%s","%s", name, rst);
-
+    return env->NewStringUTF("invokeC");
 }

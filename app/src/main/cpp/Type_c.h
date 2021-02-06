@@ -17,6 +17,8 @@ int showType(void);
 
 char getName(void);
 
+int sum(int m, int n);
+
 #ifdef __cplusplus
 }
 #endif

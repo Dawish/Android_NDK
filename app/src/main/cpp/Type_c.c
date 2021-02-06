@@ -30,3 +30,11 @@ extern char getName(void) {
 
     return mG1.name;
 }
+
+int sum(int m, int n) {
+    int i, sum = 0;
+    for (i = m; i <= n; i++) {
+        sum += i;
+    }
+    return sum;
+}
