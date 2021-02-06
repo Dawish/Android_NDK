@@ -1,6 +1,7 @@
 //
 // Created by danxingxi on 2021/1/24.
 //
+// http://c.biancheng.net/view/1991.html C语言指针讲解
 
 #ifndef ANDROID_NDK_TYPE_C_H
 #define ANDROID_NDK_TYPE_C_H
@@ -15,9 +16,11 @@ extern "C" {
 
 int showType(void);
 
-char getName(void);
+void getName(void);
 
 int sum(int m, int n);
+
+int pointSwitchValue(int m, int n);
 
 #ifdef __cplusplus
 }

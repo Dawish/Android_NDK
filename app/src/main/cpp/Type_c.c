@@ -14,21 +14,33 @@ struct Good {
     char name[50];
 };
 
-extern int showType(void) {
+int showType(void) {
 
     LOGD("%s", "showType");
 
     return sizeof(int);
 }
 
-extern char getName(void) {
+void getName(void){
 
-    // 使用结构体
-    struct Good mG1;
-    mG1.age = 2;
-    strcpy(mG1.name, "大西瓜");
+    char name[20]  = "asdasd";
+    // char数组可以直接按index使用
+    name[0] = 'd';
+    name[1] = 'x';
+    name[2] = 'x';
+    LOGD("%s", name);
 
-    return mG1.name;
+    // 赋值
+    strcpy(name, "new");
+    // 拼接内容
+    strcat(name, "added");
+    LOGD("%s", name);
+
+    // char指针不可以直接按index使用
+//    char *name2 = &name;
+//    LOGD("%s", name2);
+//    name2[0] = 'p';
+
 }
 
 int sum(int m, int n) {
@@ -37,4 +49,20 @@ int sum(int m, int n) {
         sum += i;
     }
     return sum;
+}
+
+int pointSwitchValue(int a, int b){
+
+    int temp;
+    int *pa = &a, *pb = &b;
+    printf("a=%d, b=%d\n", a, b);
+    /*****开始交换*****/
+    // 将a的值先保存起来
+    temp = *pa;
+    // 将b的值交给a
+    *pa = *pb;
+    // 再将保存起来的a的值交给b
+    *pb = temp;
+
+    return 0;
 }

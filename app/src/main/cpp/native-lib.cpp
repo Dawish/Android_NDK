@@ -193,6 +193,8 @@ extern "C"
 JNIEXPORT jstring JNICALL
 Java_danxx_ndk_MainActivity_invokeC(JNIEnv *env, jobject thiz) {
 
+    getName();
+
     int mSum = sum(1, 3);
     string mm = to_string(mSum);
     LOGD("%s", mm.c_str());
