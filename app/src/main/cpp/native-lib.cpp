@@ -199,5 +199,23 @@ Java_danxx_ndk_MainActivity_invokeC(JNIEnv *env, jobject thiz) {
     string mm = to_string(mSum);
     LOGD("%s", mm.c_str());
 
+    int a = 2;
+    int b = 3;
+    LOGD("%s", to_string(a).c_str());
+    LOGD("%s", to_string(b).c_str());
+
+    char nm[10] = "adc";
+    // int - '0' 先逐个加上‘0’，然后再整体翻转
+    nm[0] = a + '0';
+
+    nm[1] = 's';
+    nm[2] = 's';
+    LOGD("%s", nm);
+
+    // char - '0' char类型转化成int类型
+    char ac = '7';
+    int acn = ac - '0';
+    LOGD("%s", to_string(acn).c_str());
+
     return env->NewStringUTF("invokeC");
 }
