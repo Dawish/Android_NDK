@@ -11,14 +11,18 @@
 // 申明结构体
 struct Good {
     int age;
-    char name[50];
+    char name;
 };
 
-int showType(void) {
+int showStruct(void) {
 
     LOGD("%s", "showType");
 
-    return sizeof(int);
+    struct Good d;
+    d.name = "dxx";
+    d.age = 18;
+
+    return d.age;
 }
 
 void getName(void){

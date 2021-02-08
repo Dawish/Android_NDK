@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-int showType(void);
+int showStruct(void);
 
 void getName(void);
 
