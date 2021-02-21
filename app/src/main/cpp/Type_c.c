@@ -11,18 +11,33 @@
 // 申明结构体
 struct Good {
     int age;
-    char name;
-};
+    char name[50];
+} good = {212, "good_name"};
 
 int showStruct(void) {
 
     LOGD("%s", "showType");
 
-    struct Good d;
-    d.name = "dxx";
-    d.age = 18;
+//    struct Good myd;
+//    myd.name = "dxx";
+//    myd.age = 18;
 
-    return d.age;
+    return good.age;
+}
+
+char* getGoodName(void) {
+    struct Good good1;
+    struct Good good2;
+
+    good1.age = 21;
+    strcpy(good1.name, "daxigua");
+
+    good2.age = 22;
+    strcpy(good2.name, "xiaoxigua");
+
+    char *tN = NULL;
+    tN = &good2.name;
+    return tN;
 }
 
 void getName(void){

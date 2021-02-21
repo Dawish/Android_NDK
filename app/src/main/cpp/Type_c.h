@@ -22,6 +22,8 @@ int sum(int m, int n);
 
 int pointSwitchValue(int m, int n);
 
+char* getGoodName(void);
+
 #ifdef __cplusplus
 }
 #endif

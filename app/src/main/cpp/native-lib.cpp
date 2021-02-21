@@ -220,5 +220,9 @@ Java_danxx_ndk_MainActivity_invokeC(JNIEnv *env, jobject thiz) {
     int age = showStruct();
     LOGD("%s", to_string(age).c_str());
 
+    char *gName = getGoodName();
+
+    LOGD("%s", gName);
+
     return env->NewStringUTF("invokeC");
 }
