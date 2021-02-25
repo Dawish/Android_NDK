@@ -169,6 +169,7 @@ Java_danxx_ndk_MainActivity_ndkReadFile(JNIEnv *env, jobject instance, jstring s
         LOGD("%s", "NDK read file not exist.");
     } else {
         LOGD("%s", "NDK read file exist.");
+        // FILE 这是一个适合存储文件流信息的对象类型
         FILE *pFile = fopen(strPath, "r");
         fseek(pFile, 0L, SEEK_END);
         int nFileSize = ftell(pFile);

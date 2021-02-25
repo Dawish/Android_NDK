@@ -14,6 +14,13 @@ struct Good {
     char name[50];
 } good = {212, "good_name"};
 
+// 有多成员的共用体，但是任何时候只能有一个成员带有值。
+union Data {
+    int i;
+    float f;
+    char  str[20];
+};
+
 int showStruct(void) {
 
     LOGD("%s", "showType");
@@ -21,8 +28,10 @@ int showStruct(void) {
 //    struct Good myd;
 //    myd.name = "dxx";
 //    myd.age = 18;
-
-    return good.age;
+    union Data data;
+    LOGD("%s", "union");
+    data.i = good.age;
+    return data.i;
 }
 
 char* getGoodName(void) {
