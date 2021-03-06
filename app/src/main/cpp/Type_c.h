@@ -24,7 +24,7 @@ struct Books{
     unsigned int id;
 };
 
-typedef Books BOOK;
+typedef struct Books BOOK;
 
 int showStruct(void);
 

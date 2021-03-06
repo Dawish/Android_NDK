@@ -98,5 +98,6 @@ int pointSwitchValue(int a, int b){
 
 SIZE getSize() {
     SIZE mSize = 199;
+    printf("SIZE = %d", mSize);
     return mSize;
 }

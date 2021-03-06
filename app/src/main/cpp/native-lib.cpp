@@ -216,10 +216,10 @@ Java_danxx_ndk_MainActivity_invokeC(JNIEnv *env, jobject thiz) {
     // char - '0' char类型转化成int类型
     char ac = '7';
     int acn = ac - '0';
-    LOGD("%s", to_string(acn).c_str());
+    LOGD("%d", acn);
 
     int age = showStruct();
-    LOGD("%s", to_string(age).c_str());
+    LOGD("%d", age);
 
     char *gName = getGoodName();
 
@@ -228,7 +228,7 @@ Java_danxx_ndk_MainActivity_invokeC(JNIEnv *env, jobject thiz) {
 
     LOGD("------------------------size");
     SIZE size = getSize();
-    LOGD("%s", to_string(size).c_str());
+    LOGD("%d", size);
 
     return env->NewStringUTF("invokeC");
 }
