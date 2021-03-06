@@ -6,6 +6,7 @@
 #include <limits.h>
 #include <string.h>
 #include "Log.h"
+#include "Type_c.h"
 
 
 // 申明结构体
@@ -93,4 +94,9 @@ int pointSwitchValue(int a, int b){
     *pb = temp;
 
     return 0;
+}
+
+SIZE getSize() {
+    SIZE mSize = 199;
+    return mSize;
 }

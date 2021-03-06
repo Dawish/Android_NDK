@@ -14,6 +14,18 @@
 extern "C" {
 #endif
 
+//为类型取一个新的名字
+typedef unsigned int SIZE;
+typedef unsigned char TYPE;
+
+struct Books{
+    char name[50];
+    char author[50];
+    unsigned int id;
+};
+
+typedef Books BOOK;
+
 int showStruct(void);
 
 void getName(void);
@@ -23,6 +35,8 @@ int sum(int m, int n);
 int pointSwitchValue(int m, int n);
 
 char* getGoodName(void);
+
+SIZE getSize(void);
 
 #ifdef __cplusplus
 }

@@ -225,5 +225,10 @@ Java_danxx_ndk_MainActivity_invokeC(JNIEnv *env, jobject thiz) {
 
     LOGD("%s", gName);
 
+
+    LOGD("------------------------size");
+    SIZE size = getSize();
+    LOGD("%s", to_string(size).c_str());
+
     return env->NewStringUTF("invokeC");
 }
